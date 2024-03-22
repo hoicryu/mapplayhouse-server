@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medal: one
+  evaluation_at: 2021-07-19 20:26:16
+  user: one
+  file: MyString
+
+two:
+  medal: two
+  evaluation_at: 2021-07-19 20:26:16
+  user: two
+  file: MyString

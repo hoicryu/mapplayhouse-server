@@ -1,0 +1,12 @@
+{
+  "availability-zones:account=662802980924:region=ap-northeast-2": [
+    "ap-northeast-2a",
+    "ap-northeast-2b",
+    "ap-northeast-2c",
+    "ap-northeast-2d"
+  ],
+  "hosted-zone:account=662802980924:domainName=varsity-scouters.com:region=ap-northeast-2": {
+    "Id": "/hostedzone/Z002486630PKCJMPL0TWS",
+    "Name": "varsity-scouters.com."
+  }
+}

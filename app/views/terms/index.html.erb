@@ -1,0 +1,7 @@
+<div class="page-content">
+  <div class="container" style="padding: 20px;">
+    <% @terms.each do |term|%>
+      <div><%= term.content.html_safe %></div>
+    <% end %>  
+  </div>
+</div>

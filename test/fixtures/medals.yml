@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  license: one
+  title: MyString
+  ability: MyString
+  grade: 1
+
+two:
+  license: two
+  title: MyString
+  ability: MyString
+  grade: 1

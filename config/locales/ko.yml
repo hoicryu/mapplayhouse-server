@@ -1,0 +1,105 @@
+ko:
+  attributes:
+    id: ID
+    user: 사용자
+    name: 이름
+    gender: 성별
+    date: 날짜
+    created_at: 생성일
+    updated_at: 업데이트
+
+  activerecord:
+    attributes:
+      user:
+        account_type: 계정타입
+        name: 사용자명
+        email: 이메일
+        phone: 전화번호
+        gender: 성별
+        sign_in_count: 로그인 수
+        accept_sms: SMS 수신
+        accept_email: 이메일 수신
+        user_type: 사용자 유형
+        uid: UID
+        provider: 플랫폼
+        device_type: 기기종류
+
+    models:
+      dashboard: 대시보드
+      user: "사용자"
+      admin_user: 어드민
+    
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "항목이 비어있습니다"
+            gender: "성별"
+            birthday: "생일"
+            allow_email: "이메일 수신동의"
+            allow_sms: "SMS 수신동의"
+            birthday:
+              blank: "항목이 비어있습니다"
+            phone: "휴대폰번호"
+            phone:
+              blank: "항목이 비어있습니다"
+            password: "비밀번호"
+            password:
+              blank: "항목이 비어있습니다"
+            username: "닉네임"
+            username:
+              blank: "항목이 비어있습니다"
+            email:
+              blank: "항목이 비어있습니다"
+            gender:
+              blank: "항목이 비어있습니다"
+            company:
+              blank: "항목이 비어있습니다"
+            job:
+              blank: "항목이 비어있습니다"
+
+  enum:
+    user:
+      gender:
+        man: 남성
+        woman: 여성
+        no_select: 선택안함
+
+  time:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%Y-%m-%d"
+      long: "%Y-%m-%d %H:%M"
+  date:
+    month_names:
+    -
+    - 1월
+    - 2월
+    - 3월
+    - 4월
+    - 5월
+    - 6월
+    - 7월
+    - 8월
+    - 9월
+    - 10월
+    - 11월
+    - 12월
+    formats:
+      default: "%Y-%m-%d"
+      short: "%Y-%m-%d"
+      long: "%Y-%m-%d"
+    order:
+      - :year
+      - :month
+      - :day
+
+  views:
+    pagination:
+      next: 다음
+      last: 마지막
+      first: 처음
+      prev: 이전
+      truncate: ...

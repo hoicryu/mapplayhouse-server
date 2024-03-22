@@ -1,0 +1,61 @@
+$am-theme-primary: #5c7cfa;
+
+@import "active_admin/mixins";
+@import "activeadmin_addons/all";
+@import "activeadmin_addons/material";
+@import "active_material";
+@import "imageviewer";
+@import "activeadmin_reorderable";
+
+.dropdown_menu_button.disabled {
+  color: black;
+  background: none;
+}
+
+.index_table td img,
+.panel_contents table td img {
+  width: 70px;
+  height: 70px;
+}
+.active {
+  background: green;
+}
+.disabled {
+  background: grey;
+}
+.sold_out {
+  background: yellow;
+  color: black;
+}
+.ongoing {
+  background: green;
+}
+.finished {
+  background: blue;
+}
+.결제완료 {
+  background: green;
+}
+.환불 {
+  background: yellow;
+  color: black;
+}
+.성공 {
+  background: green;
+}
+.실패 {
+  background: red;
+}
+
+.row {
+  td {
+    img {
+      width: 100%;
+
+      &.admin-show-image {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }
+}

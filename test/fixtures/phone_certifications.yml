@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  phone: MyString
+  code: MyString
+  confirmed_at: 2021-01-26 18:54:55
+
+two:
+  phone: MyString
+  code: MyString
+  confirmed_at: 2021-01-26 18:54:55
