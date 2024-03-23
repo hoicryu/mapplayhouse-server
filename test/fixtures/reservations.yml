@@ -2,14 +2,6 @@
 
 one:
   user: one
-  start_at: 2021-07-19 20:35:50
-  end_at: 2021-07-19 20:35:50
-  request: MyText
-  acceptance: 1
 
 two:
   user: two
-  start_at: 2021-07-19 20:35:50
-  end_at: 2021-07-19 20:35:50
-  request: MyText
-  acceptance: 1
