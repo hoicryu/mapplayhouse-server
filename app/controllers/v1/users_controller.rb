@@ -29,10 +29,50 @@ module V1
       render json: serialize(current_api_user, serializer_name: :CurrentUserSerializer)
     end
 
-    def obtain_medals
-      user = User.find(params[:id])
-      evalutions = user.evaluations.completed
-      render json: each_serialize(evalutions)
+    def kakao 
+      begin
+        @response = HTTParty.get(
+          'https://kapi.kakao.com/v2/user/me',
+          headers: {
+            "Authorization": "Bearer #{params[:access_token]}",
+            "Content-type": 'application/x-www-form-urlencoded',
+            "charset": 'utf-8'
+          }
+        )
+        if @response.code == 200
+          email = @response.dig('kakao_account', 'email')
+          nickname = @response.dig('properties', 'nickname')
+          email ||= "#{DateTime.now.strftime('%Q')}@kakao.login"
+          result = User.login('kakao', @response.dig('id').to_s, email, nickname)
+        end
+      rescue
+        result = false
+      end 
+      render json: result
+    end
+
+    def naver
+      begin
+        @response = HTTParty.get(
+          'https://openapi.naver.com/v1/nid/me',
+          headers: {
+            "Authorization": "Bearer #{params[:access_token]}",
+            "Content-type": 'application/x-www-form-urlencoded',
+            "charset": 'utf-8'
+          }
+        ).parsed_response
+
+        if @response['resultcode'] == "00"
+          email = @response.dig('response', 'email')
+          nickname = @response.dig('response', 'nickname')
+          id = @response.dig('response', 'id')
+          email ||= "#{DateTime.now.strftime('%Q')}@naver.login"
+          result = User.login('naver', id, email, nickname)
+        end
+      rescue
+        result = false
+      end 
+      render json: result
     end
 
     private
