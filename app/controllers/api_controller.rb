@@ -1,7 +1,8 @@
 class ApiController < ActionController::API
   include Pundit
-  include CognitoJwt
+  include JWTSessions::RailsAuthorization
   # include JsonErrors
+  rescue_from JWTSessions::Errors::Unauthorized, with: :un_authorized
   rescue_from Pundit::NotAuthorizedError, with: :pundit_un_authorized
 
   def render_resource(resource)
@@ -26,6 +27,27 @@ class ApiController < ActionController::API
   end
 
   protected
+
+  def authorize_controller?
+    !devise_controller? && controller_name != "refresh"
+  end
+
+  def configure_permitted_parameters
+    user_fields = %w[name gender birthday]
+
+    devise_parameter_sanitizer.permit(:sign_up, keys: user_fields)
+    devise_parameter_sanitizer.permit(:account_update, keys: user_fields)
+  end
+
+  def current_api_user
+    authorize_access_request!
+    begin
+      @current_api_user ||= User.find(payload["user_id"])
+    rescue StandardError => e
+      @current_api_user = nil
+    end
+  end
+
   def pundit_user
     current_api_user if request.headers["Authorization"]
   rescue StandardError

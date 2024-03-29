@@ -1,5 +1,7 @@
 module V1
   class UsersController < V1::BaseController
+    include JWTSessions::RailsAuthorization
+    
     def index
       render json: each_serialize(User.all.sample(4), serializer_name: :UserSerializer, context: { current_api_user: current_api_user })
     end
@@ -16,7 +18,11 @@ module V1
 
     def update
       result = current_api_user.update(user_params)
-      render json: { result: result }
+      user_payload = { user_id: current_api_user.id, user: PayloadSerializer.new.serialize(current_api_user) }
+      session = JWTSessions::Session.new(payload: user_payload, refresh_by_access_allowed: true)
+      tokens = session.login
+
+      render json: { result: result, csrf: tokens[:csrf], token: tokens[:access] }
     end
 
     def create
@@ -26,13 +32,53 @@ module V1
     end
 
     def me
-      render json: serialize(current_api_user, serializer_name: :CurrentUserSerializer)
+      render json: serialize(current_api_user, serializer_name: 'PayloadSerializer')
     end
 
-    def obtain_medals
-      user = User.find(params[:id])
-      evalutions = user.evaluations.completed
-      render json: each_serialize(evalutions)
+    def kakao 
+      begin
+        @response = HTTParty.get(
+          'https://kapi.kakao.com/v2/user/me',
+          headers: {
+            "Authorization": "Bearer #{params[:access_token]}",
+            "Content-type": 'application/x-www-form-urlencoded',
+            "charset": 'utf-8'
+          }
+        )
+        if @response.code == 200
+          email = @response.dig('kakao_account', 'email')
+          nickname = @response.dig('properties', 'nickname')
+          email ||= "#{DateTime.now.strftime('%Q')}@kakao.login"
+          result = User.login('kakao', @response.dig('id').to_s, email, nickname)
+        end
+      rescue
+        result = false
+      end 
+      render json: result
+    end
+
+    def naver
+      begin
+        @response = HTTParty.get(
+          'https://openapi.naver.com/v1/nid/me',
+          headers: {
+            "Authorization": "Bearer #{params[:access_token]}",
+            "Content-type": 'application/x-www-form-urlencoded',
+            "charset": 'utf-8'
+          }
+        ).parsed_response
+
+        if @response['resultcode'] == "00"
+          email = @response.dig('response', 'email')
+          nickname = @response.dig('response', 'nickname')
+          id = @response.dig('response', 'id')
+          email ||= "#{DateTime.now.strftime('%Q')}@naver.login"
+          result = User.login('naver', id, email, nickname)
+        end
+      rescue
+        result = false
+      end 
+      render json: result
     end
 
     private

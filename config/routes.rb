@@ -12,21 +12,22 @@ Rails.application.routes.draw do
   end
 
 
-  # devise_for :users,
-  #            path: "",
-  #            path_names: {
-  #              sign_in: "login",
-  #              sign_out: "logout",
-  #              registration: "signup"
-  #            },
-  #            controllers: {
-  #              sessions: "users/sessions",
-  #              registrations: "users/registrations"
-  #            }
-  post "/signup" => "v1/users#create"
-  resources :terms, only: %i[index show]
+  devise_for :users,
+             path: "",
+             path_names: {
+               sign_in: "login",
+               sign_out: "logout",
+               registration: "signup"
+             },
+             controllers: {
+               sessions: "users/sessions",
+               registrations: "users/registrations"
+             }
   
   api_version(module: "V1", header: { name: "Accept-Version", value: "v1" }) do
+    post '/users/auth/kakao' => 'users#kakao'
+    post '/users/auth/naver' => 'users#naver'
+    get '/users/auth/naver' => 'users#naver'
     resources :objects
     resources :images do
       post :dropzone, on: :collection
