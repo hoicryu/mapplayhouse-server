@@ -1,5 +1,7 @@
 module V1
   class UsersController < V1::BaseController
+    include JWTSessions::RailsAuthorization
+    
     def index
       render json: each_serialize(User.all.sample(4), serializer_name: :UserSerializer, context: { current_api_user: current_api_user })
     end
@@ -16,7 +18,11 @@ module V1
 
     def update
       result = current_api_user.update(user_params)
-      render json: { result: result }
+      user_payload = { user_id: current_api_user.id, user: PayloadSerializer.new.serialize(current_api_user) }
+      session = JWTSessions::Session.new(payload: user_payload, refresh_by_access_allowed: true)
+      tokens = session.login
+
+      render json: { result: result, csrf: tokens[:csrf], token: tokens[:access] }
     end
 
     def create
@@ -26,7 +32,7 @@ module V1
     end
 
     def me
-      render json: serialize(current_api_user, serializer_name: :CurrentUserSerializer)
+      render json: serialize(current_api_user, serializer_name: 'PayloadSerializer')
     end
 
     def kakao 
