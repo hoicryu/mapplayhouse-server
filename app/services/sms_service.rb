@@ -9,7 +9,7 @@ class SmsService
     result = false
     begin
       url = URI.parse("https://sslsms.cafe24.com/sms_sender.php")
-      if Rails.env.production? || %w[01097912095 01055302795].include?(phone)
+      if Rails.env.production? || %w[01029560790].include?(phone)
         res = Net::HTTP.post_form(url, { user_id: "flyingmatesms",
                                          secure: "e45b071e54a9e9b47367873c42a03ff9",
                                          sphone1: "010", sphone2: "9391", sphone3: "6522",

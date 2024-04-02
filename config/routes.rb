@@ -40,5 +40,9 @@ Rails.application.routes.draw do
       end
       resources :notifications, only: %i[index create update]
     end
+    namespace :phone_certifications do
+      get :sms_auth
+      get :check
+    end
   end
 end
