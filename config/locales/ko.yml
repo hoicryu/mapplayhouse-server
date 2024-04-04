@@ -23,11 +23,18 @@ ko:
         uid: UID
         provider: 플랫폼
         device_type: 기기종류
+      notice:
+        title: 제목
+        body: 내용
+        position: 순서
+        status: 상태
+        _type: 타입
 
     models:
       dashboard: 대시보드
       user: "사용자"
       admin_user: 어드민
+      notice: 공지
     
 
     errors:
@@ -66,6 +73,14 @@ ko:
         man: 남성
         woman: 여성
         no_select: 선택안함
+    notice:
+      status:
+        visible: 노출
+        invisible: 비노출
+      _type:
+        notice: 일반공지
+        event: 이벤트
+        application: 지원
 
   time:
     formats:

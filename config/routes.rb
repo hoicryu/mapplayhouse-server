@@ -44,5 +44,6 @@ Rails.application.routes.draw do
       get :sms_auth
       get :check
     end
+    resources :orders
   end
 end
