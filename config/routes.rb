@@ -45,5 +45,6 @@ Rails.application.routes.draw do
       get :check
     end
     resources :orders
+    resources :groups
   end
 end

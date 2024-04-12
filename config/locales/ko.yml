@@ -81,6 +81,10 @@ ko:
         notice: 일반공지
         event: 이벤트
         application: 지원
+    group:
+      status:
+        recruiting: 모집중
+        closed: 마감
 
   time:
     formats:
