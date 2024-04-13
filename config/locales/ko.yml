@@ -29,12 +29,18 @@ ko:
         position: 순서
         status: 상태
         _type: 타입
+      musical:
+        title: 제목
+        body: 설명
+        _type: 타입
+        image: 이미지
 
     models:
       dashboard: 대시보드
       user: "사용자"
       admin_user: 어드민
       notice: 공지
+      musical: 뮤지컬
     
 
     errors:
@@ -85,6 +91,11 @@ ko:
       status:
         recruiting: 모집중
         closed: 마감
+    musical:
+      _type:
+        small: 소극
+        big: 대극
+        theatrical: 연극
 
   time:
     formats:
