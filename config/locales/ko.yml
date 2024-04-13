@@ -34,6 +34,15 @@ ko:
         body: 설명
         _type: 타입
         image: 이미지
+      group:
+        title: 기수
+        status: 상태
+        audition_date: 오디션일
+        submit_start_at: 제출 시작일
+        submit_end_at: 제출 마감일
+        performance_date: 공연일
+        musical: 뮤지컬
+
 
     models:
       dashboard: 대시보드
@@ -41,6 +50,7 @@ ko:
       admin_user: 어드민
       notice: 공지
       musical: 뮤지컬
+      group: 그룹
     
 
     errors:

@@ -17,44 +17,15 @@ $am-theme-primary: #5c7cfa;
   width: 70px;
   height: 70px;
 }
-.active {
-  background: green;
-}
-.disabled {
-  background: grey;
-}
-.sold_out {
-  background: yellow;
-  color: black;
-}
-.ongoing {
-  background: green;
-}
-.finished {
-  background: blue;
-}
-.결제완료 {
-  background: green;
-}
-.환불 {
-  background: yellow;
-  color: black;
-}
-.성공 {
-  background: green;
-}
-.실패 {
-  background: red;
-}
 
 .row {
   td {
     img {
       width: 100%;
 
-      &.admin-show-image {
-        width: 300px;
-        height: 300px;
+      &.cover-imag {
+        width: 1000px;
+        height: 1000px;
       }
     }
   }

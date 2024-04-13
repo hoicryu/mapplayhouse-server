@@ -8,7 +8,7 @@ ActiveAdmin.register Musical do
     column :title
     column :body
     column :_type do |musical| I18n.t("enum.musical._type.#{musical._type}") end
-    column :image do |musical| image_tag(musical.image_path, class: "admin-show-image") end
+    column :image do |musical| image_tag(musical.image_path) end
     column :created_at
     column :updated_at
     actions
@@ -20,7 +20,7 @@ ActiveAdmin.register Musical do
       row :title
       row :body
       row :_type do |musical| I18n.t("enum.musical._type.#{musical._type}") end
-      row :image do |musical| image_tag(musical.image_path, class: "admin-show-image") end
+      row :image do |musical| image_tag(musical.image_path, class: "cover-image") end
     end
   end
 
@@ -29,8 +29,8 @@ ActiveAdmin.register Musical do
       f.input :title
       f.input :body
       f.input :_type, as: :select, collection: Musical.enum_selectors(:_type)
-      f.inputs "상품이미지", :multipart => true do
-        f.input :image, :as => :file, input_html: {class: "item-image"}, :hint => f.object.image.present? \
+      f.inputs "이미지", :multipart => true do
+        f.input :image, :as => :file, input_html: {class: "cover-image"}, :hint => f.object.image.present? \
         ? image_tag(f.object.image.url, class: "")
         : content_tag(:span, "No Image Yet")
         f.input :image_cache, :as => :hidden
