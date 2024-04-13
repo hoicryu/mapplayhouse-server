@@ -35,6 +35,7 @@ ActiveAdmin.register Musical do
         : content_tag(:span, "No Image Yet")
         f.input :image_cache, :as => :hidden
       end
+      render 'admin/groups/image_reader'
     end
     f.actions
   end

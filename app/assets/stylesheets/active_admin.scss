@@ -18,15 +18,10 @@ $am-theme-primary: #5c7cfa;
   height: 70px;
 }
 
-.row {
-  td {
-    img {
-      width: 100%;
+img {
+  width: 100%;
 
-      &.cover-imag {
-        width: 1000px;
-        height: 1000px;
-      }
-    }
+  &.cover-image {
+    max-width: 600px;
   }
 }
