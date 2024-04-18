@@ -45,6 +45,10 @@ Rails.application.routes.draw do
       get :check
     end
     resources :orders
-    resources :groups
+    resources :groups do
+      collection do
+        get :before_perform
+      end
+    end
   end
 end

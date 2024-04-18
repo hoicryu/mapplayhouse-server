@@ -100,7 +100,9 @@ ko:
     group:
       status:
         recruiting: 모집중
-        closed: 마감
+        closed: 모집마감
+        upcomming: 공연임박
+        done: 공연완료
     musical:
       _type:
         small: 소극
