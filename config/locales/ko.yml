@@ -41,7 +41,8 @@ ko:
         audition_date: 오디션일
         submit_start_at: 제출 시작일
         submit_end_at: 제출 마감일
-        performance_date: 공연일
+        performance_start_at: 공연시작일
+        performance_end_at: 공연마감일
         musical: 뮤지컬
         application_link: 관람신청링크
         concert_hall: 공연장

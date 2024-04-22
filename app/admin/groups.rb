@@ -15,7 +15,7 @@ ActiveAdmin.register Group do
     column :audition_date
     column :submit_start_at
     column :submit_end_at
-    column :performance_date
+    column :performance_start_at
     column :application_link
     column :concert_hall
     actions
@@ -34,7 +34,8 @@ ActiveAdmin.register Group do
       row :audition_date
       row :submit_start_at
       row :submit_end_at
-      row :performance_date
+      row :performance_start_at
+      row :performance_end_at
       row :application_link
       row :concert_hall
     end
@@ -49,7 +50,8 @@ ActiveAdmin.register Group do
       f.input :audition_date, as: :date_time_picker
       f.input :submit_start_at, as: :date_time_picker
       f.input :submit_end_at, as: :date_time_picker
-      f.input :performance_date, as: :date_time_picker
+      f.input :performance_start_at, as: :date_time_picker
+      f.input :performance_end_at, as: :date_time_picker
       f.input :application_link
       f.input :concert_hall
     end

@@ -80,7 +80,8 @@ ActiveRecord::Schema.define(version: 2024_04_22_132952) do
     t.datetime "submit_end_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "performance_date"
+    t.datetime "performance_start_at"
+    t.datetime "performance_end_at"
     t.datetime "submit_start_at"
     t.string "application_link"
     t.string "concert_hall"
