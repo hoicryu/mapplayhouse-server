@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_17_124513) do
+ActiveRecord::Schema.define(version: 2024_04_22_132952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 2024_04_17_124513) do
     t.datetime "performance_date"
     t.datetime "submit_start_at"
     t.string "application_link"
+    t.string "concert_hall"
+    t.string "musical_alias"
     t.index ["musical_id"], name: "index_groups_on_musical_id"
   end
 
