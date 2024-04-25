@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_22_132952) do
+ActiveRecord::Schema.define(version: 2024_04_25_143125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,17 @@ ActiveRecord::Schema.define(version: 2024_04_22_132952) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.string "title"
+    t.string "youtube_url"
+    t.integer "_type"
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_videos_on_group_id"
+  end
+
   add_foreign_key "application_forms", "groups"
   add_foreign_key "application_forms", "users"
   add_foreign_key "contacts", "users"
@@ -217,4 +228,5 @@ ActiveRecord::Schema.define(version: 2024_04_22_132952) do
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
   add_foreign_key "users", "roles"
+  add_foreign_key "videos", "groups"
 end

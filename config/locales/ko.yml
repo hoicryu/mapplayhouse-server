@@ -46,7 +46,12 @@ ko:
         musical: 뮤지컬
         application_link: 관람신청링크
         concert_hall: 공연장
-
+      video:
+        group: 그룹
+        title: 제목
+        youtube_url: 링크
+        _type: 타입
+        body: 내용
 
     models:
       dashboard: 대시보드
@@ -55,6 +60,7 @@ ko:
       notice: 공지
       musical: 뮤지컬
       group: 그룹
+      video: 비디오
     
 
     errors:
@@ -112,6 +118,11 @@ ko:
         small: 소극
         big: 대극
         theatrical: 연극
+    video:
+      _type:
+        performance: 공연
+        practice: 연습
+
 
   time:
     formats:
