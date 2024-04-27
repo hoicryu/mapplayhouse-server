@@ -52,6 +52,7 @@ ko:
         youtube_url: 링크
         _type: 타입
         body: 내용
+        show_type: 사이트 표시
 
     models:
       dashboard: 대시보드
@@ -122,6 +123,10 @@ ko:
       _type:
         performance: 공연
         practice: 연습
+      show_type:
+        not_show: 숨김
+        home: 홈
+
 
 
   time:

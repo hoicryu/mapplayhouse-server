@@ -50,5 +50,6 @@ Rails.application.routes.draw do
         get :before_perform
       end
     end
+    resources :videos, only: :index
   end
 end
