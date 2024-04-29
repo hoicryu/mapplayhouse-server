@@ -4,6 +4,24 @@ ActiveAdmin.register Video do
   filter :title
   filter :group_id
 
+  controller do
+    def create
+      if params.dig(:video, :youtube_url).present?
+        link = params.dig(:video, :youtube_url)
+        regexs = [/\S+\/embed\//, /\S+\.be\//]
+        if !/\S+\/watch\?v/.match?(link)
+          regexs.each do |regex|
+            if regex.match?(link)
+              changed_link = link.gsub!(link[regex], "")
+              params[:video][:youtube_url] = "https://www.youtube.com/watch?v=" + changed_link
+            end
+          end
+        end
+      end
+      super
+    end
+  end
+
 
   index do
     id_column
