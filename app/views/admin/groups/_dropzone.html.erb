@@ -1,0 +1,164 @@
+<!-- 복수이미지 파일 -->
+<div class="form-group">
+  <div id="groups-dropzone" class="dropzone project-dropzone" style="border: 2px dashed rgba(0, 0, 0, 0.3);
+                  min-height: 170px !important;">
+    <% if !f.object.new_record? %>
+      <% f.object.images.order(:created_at).each do |image| %>
+        <div class="dz-preview dz-file-preview dz-complete m-2" id="file-content-<%= image.id %>">
+          <div class="dropzone-image">
+            <input type="hidden" name="group[images_attributes][<%= image.id %>][id]" value="<%= image.id %>" id="group_images_attributes_<%= image.id %>_id" class="custom-control-input" data-id="<%= image.id %>">
+          </div>
+          <div class="dz-image">
+            <img src="<%= image.image_path %>" style="width:100%;" data-dz-thumbnail />
+          </div>
+          <a class="dz-remove file-content-remove" data-dz-remove data-id="<%= image.id %>">삭제하기</a>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="dz-message" style="margin: 65px">
+      이미지 업로드 하기 (드래그 가능)
+    </div>
+    <%= f.hidden_field :images, class: "dropzone_images_input" %>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+  Dropzone.autoDiscover = false;
+  
+  $(document).ready(function(){
+
+    const uploadingSwal = Swal.mixin({
+      customClass: {
+        container: "upload-swal"
+      },
+      showConfirmButton: false,
+      title: '이미지을 업로드 중 입니다. <b class="file-progress-text"></b>',
+      icon: 'info',
+      backdrop: false,
+    })
+    const imageIds = [];
+    const myDropzone = new Dropzone("div#groups-dropzone", {
+      url: "<%= dropzone_admin_groups_path(imagable_id: f.object.id, imagable_type: f.object.class.name) %>",
+      addRemoveLinks: true,
+      acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF",
+      maxFiles: 20,
+      maxFilesize: 100,
+      dictCancelUpload: '삭제하기',
+      dictUploadCanceled: '삭제하기',
+      dictCancelUploadConfirmation: '정말 삭제하시겠습니까?',
+      dictRemoveFile: '삭제하기',
+      paramName: 'image',
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      accept: function (file, done) {
+        $("div#groups-dropzone").css({
+          "height": "auto"
+        });
+        done();
+      },
+      processing: function (file) {
+        let self = this
+        let activeFiles = self.getAcceptedFiles()
+        let uploadedFiles = activeFiles.filter(function (v) {
+          return v.status == "success"
+        })
+        if (!uploadingSwal.isVisible()) {
+          uploadingSwal.fire()
+          $(uploadingSwal.getTimerProgressBar()).css("width", "0px");
+          $(uploadingSwal.getTimerProgressBar()).show()
+          $("#growls-default").css("padding-top", uploadingSwal.getContainer().offsetHeight + "px")
+          $(uploadingSwal.getContainer()).find(".file-progress-text").text(uploadedFiles.length + "/" + activeFiles
+            .length)
+        }
+      },
+      success: function (file) {
+        let self = this
+        let activeFiles = self.getAcceptedFiles()
+        let uploadedFiles = activeFiles.filter(function (v) {
+          return v.status == "success"
+        })
+        
+        $(uploadingSwal.getContainer()).find(".file-progress-text").text(uploadedFiles.length + "/" + activeFiles
+          .length)
+        $(uploadingSwal.getTimerProgressBar()).css("width", uploadedFiles.length / activeFiles.length * 100 + "%")
+        if (file.xhr != undefined) {
+          const imageId = JSON.parse(file.xhr.response)
+          file.name
+          imageIds.push(imageId)
+          $('.dropzone_images_input').val(imageIds);
+          let str = 
+          `<div class="dropzone-image">
+            <input type="hidden" name="group[images_attributes][${imageId}][id]" value="${imageId}" id="group_images_attributes_${imageId}_id" class="custom-control-input" data-id="${imageId}">
+          </div>`
+          let Object = $('.dropzone_images_input').last()
+          for (let i = 0; i <= imageIds.indexOf(imageId); i++) {
+            Object = Object.next()
+          }
+          console.log(Object)
+          Object.find(".dz-image").before(str)
+        }
+        
+        if (self.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+          $("#growls-default").css("padding-top", "")
+          Swal.fire(
+            "Success",
+            "이미지 업로드가 완료되었습니다",
+            'success'
+          )
+        }
+      },
+      removedfile: function (file) {
+        file.previewElement.remove()
+        try {            
+          const imageId = JSON.parse(file.xhr.response);
+          const index = imageIds.indexOf(imageId);
+          if (index > -1) {
+            imageIds.splice(index, 1);
+            destroy_image(imageId, "file-content");
+          }
+          $('.dropzone_images_input').val(imageIds);
+        } catch (err) {
+          console.info(err)
+        }
+      },
+      error: function (file, errMsg) {
+        $.growl.error({
+          message: errMsg
+        });
+        file.previewElement.remove()
+      },
+      maxfilesexceeded: function (data) {
+        $.growl.error({
+          message: '최대 업로드 이미지 수는 20개 입니다.'
+        });
+      }
+      
+    });
+    $('.file-content-remove').on('click', function (e) {
+      e.preventDefault();
+      const imageId = $(this).data("id");
+      Swal.fire({
+        showCancelButton: true,
+        title: "Warning",
+        icon: "warning",
+        text: "이미지을 삭제하시겠습니까? 되돌릴 수 없습니다.",
+        preConfirm: function () {
+          destroy_image(imageId, "file-content");
+        }
+      })
+    });
+  })   
+  
+  function destroy_image(imageId, target) {
+    $.ajax({
+      url: '/admin/groups/image_destroy',
+      data: { imageId: imageId},
+      type: 'delete',
+      success: function (data) {
+        $(`#${target}-${imageId}`).remove();
+      }
+    });
+    }
+</script>

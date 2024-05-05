@@ -3,6 +3,43 @@ ActiveAdmin.register Group do
 
   filter :title
 
+  controller do
+    def create
+      if params.dig(:group, :images)
+        image_array = params.dig(:group, :images)
+        images_attributes = params.dig(:group, :images_attributes)
+        params[:group].delete :images
+        params[:group].delete :images_attributes
+      end
+
+      create! do |format|
+        Image.where(id: image_array.split(",")).update_all(imagable_id: resource.id)
+        resource.update({images_attributes: images_attributes}) if images_attributes.present?
+        format.html { redirect_to admin_group_path(resource.id) }
+      end
+    end
+  end
+
+
+  collection_action :dropzone, method: :post do
+    if params[:image].present?
+      image = Image.create!(
+        image: params[:image],
+        imagable_type: params[:imagable_type],
+        imagable_id: params[:imagable_id],
+        position: params[:position],
+      )
+      render json: image.id
+    end
+  end
+
+  collection_action :image_destroy, method: :delete do
+    image = Image.find(params[:image_id])
+    image.destroy if current_admin_user.present?
+  end
+
+
+
   index do
     id_column
     column :title
@@ -54,6 +91,9 @@ ActiveAdmin.register Group do
       f.input :performance_end_at, as: :date_time_picker
       f.input :application_link
       f.input :concert_hall
+      panel '이미지', class: "description-panel" do
+        render 'admin/groups/dropzone', f: f
+      end
     end
     f.actions
   end

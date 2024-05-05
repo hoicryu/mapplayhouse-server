@@ -1,3 +1,8 @@
+/*
+*= require dropzone/basic
+*= require dropzone/dropzone 
+*/
+
 $am-theme-primary: #5c7cfa;
 
 @import "active_admin/mixins";
@@ -23,5 +28,28 @@ img {
 
   &.cover-image {
     max-width: 600px;
+  }
+}
+
+#groups-dropzone.dropzone {
+  .dz-preview:hover {
+    z-index: 12;
+  }
+  .dropzone-image {
+    position: absolute;
+    z-index: 99;
+    width: 20px;
+    left: 10px;
+    top: 10px;
+    input {
+      font-size: 16px;
+      color: $primary-color;
+      font-weight: 900;
+      text-align: center;
+      width: 20px;
+      height: 24px;
+      padding: unset;
+      cursor: pointer;
+    }
   }
 }

@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
-  begin
-    ActiveAdmin.routes(self)
-  rescue StandardError
-    ActiveAdmin::DatabaseHitDuringLoad
-  end
+  ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_scope :users do
@@ -29,9 +25,6 @@ Rails.application.routes.draw do
     post '/users/auth/naver' => 'users#naver'
     get '/users/auth/naver' => 'users#naver'
     resources :objects
-    resources :images do
-      post :dropzone, on: :collection
-    end
     resources :users, only: %i[index show update], shallow: true do
       get :me, on: :collection
       patch :image, on: :collection
@@ -51,5 +44,10 @@ Rails.application.routes.draw do
       end
     end
     resources :videos, only: :index
+    resources :images do
+      collection do
+        post :dropzone
+      end
+    end
   end
 end
