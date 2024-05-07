@@ -29,4 +29,9 @@ class V1::ImagesController < V1::BaseController
       image.destroy
     end
   end
+
+  def recent_images
+    images = Group.done.last.images.limit(4)
+    render json: each_serialize(images)
+  end
 end

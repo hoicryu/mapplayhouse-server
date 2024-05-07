@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     resources :images do
       collection do
         post :dropzone
+        get :recent_images
       end
     end
   end
