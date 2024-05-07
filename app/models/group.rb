@@ -1,5 +1,4 @@
 class Group < ApplicationRecord
-  include ImageUrl
   include Imagable
   INDEX_PERMIT = [:status_eq].freeze
   belongs_to :musical

@@ -28,18 +28,17 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-
 .idea
 
 .DS_Store
 /public/.DS_Store
 /public/packs
 /public/packs-test
-/node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-.frontend
+.dump.rdb
+
 
 # Ignore application configuration
 /config/application.yml

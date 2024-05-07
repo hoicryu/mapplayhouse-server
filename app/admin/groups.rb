@@ -18,6 +18,12 @@ ActiveAdmin.register Group do
         format.html { redirect_to admin_group_path(resource.id) }
       end
     end
+
+    def update
+      params[:group].delete(:images) if params.dig(:group, :images)
+      params[:group].delete(:images_attributes) if params.dig(:group, :images_attributes)
+      super
+    end
   end
 
 
@@ -27,7 +33,6 @@ ActiveAdmin.register Group do
         image: params[:image],
         imagable_type: params[:imagable_type],
         imagable_id: params[:imagable_id],
-        position: params[:position],
       )
       render json: image.id
     end
