@@ -154,7 +154,7 @@
   function destroy_image(imageId, target) {
     $.ajax({
       url: '/admin/groups/image_destroy',
-      data: { imageId: imageId},
+      data: { image_id: imageId},
       type: 'delete',
       success: function (data) {
         $(`#${target}-${imageId}`).remove();
