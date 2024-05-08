@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_23_111120) do
+ActiveRecord::Schema.define(version: 2024_04_27_133503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,10 +76,16 @@ ActiveRecord::Schema.define(version: 2024_03_23_111120) do
     t.bigint "musical_id", null: false
     t.string "title"
     t.integer "status"
-    t.datetime "audition_start_at"
-    t.datetime "audition_end_at"
+    t.datetime "audition_date"
+    t.datetime "submit_end_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "performance_start_at"
+    t.datetime "performance_end_at"
+    t.datetime "submit_start_at"
+    t.string "application_link"
+    t.string "concert_hall"
+    t.string "musical_alias"
     t.index ["musical_id"], name: "index_groups_on_musical_id"
   end
 
@@ -95,8 +101,18 @@ ActiveRecord::Schema.define(version: 2024_03_23_111120) do
   create_table "musicals", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.integer "type"
+    t.integer "_type"
     t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notices", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "position"
+    t.integer "status"
+    t.integer "_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -110,6 +126,14 @@ ActiveRecord::Schema.define(version: 2024_03_23_111120) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["musical_id"], name: "index_parts_on_musical_id"
     t.index ["rating_id"], name: "index_parts_on_rating_id"
+  end
+
+  create_table "phone_certifications", force: :cascade do |t|
+    t.string "phone"
+    t.string "code"
+    t.datetime "confirmed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -183,6 +207,18 @@ ActiveRecord::Schema.define(version: 2024_03_23_111120) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.string "title"
+    t.string "youtube_url"
+    t.integer "_type"
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "show_type", default: 0
+    t.index ["group_id"], name: "index_videos_on_group_id"
+  end
+
   add_foreign_key "application_forms", "groups"
   add_foreign_key "application_forms", "users"
   add_foreign_key "contacts", "users"
@@ -193,4 +229,5 @@ ActiveRecord::Schema.define(version: 2024_03_23_111120) do
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
   add_foreign_key "users", "roles"
+  add_foreign_key "videos", "groups"
 end

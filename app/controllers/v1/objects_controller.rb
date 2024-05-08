@@ -1,6 +1,6 @@
 module V1
   class ObjectsController < V1::BaseController
-    ALLOW_MODELS = %i[user sport contact notice faq banner notification medal event stadium evaluation room court user_room term].freeze
+    ALLOW_MODELS = %i[user notice group].freeze
     before_action :generate_class
 
     def index

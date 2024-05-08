@@ -23,11 +23,45 @@ ko:
         uid: UID
         provider: 플랫폼
         device_type: 기기종류
+      notice:
+        title: 제목
+        body: 내용
+        position: 순서
+        status: 상태
+        _type: 타입
+      musical:
+        title: 제목
+        body: 설명
+        _type: 타입
+        image: 이미지
+      group:
+        title: 기수
+        musical_alias: 뮤지컬 가제
+        status: 상태
+        audition_date: 오디션일
+        submit_start_at: 제출 시작일
+        submit_end_at: 제출 마감일
+        performance_start_at: 공연시작일
+        performance_end_at: 공연마감일
+        musical: 뮤지컬
+        application_link: 관람신청링크
+        concert_hall: 공연장
+      video:
+        group: 그룹
+        title: 제목
+        youtube_url: 링크
+        _type: 타입
+        body: 내용
+        show_type: 사이트 표시
 
     models:
       dashboard: 대시보드
       user: "사용자"
       admin_user: 어드민
+      notice: 공지
+      musical: 뮤지컬
+      group: 그룹
+      video: 비디오
     
 
     errors:
@@ -66,6 +100,34 @@ ko:
         man: 남성
         woman: 여성
         no_select: 선택안함
+    notice:
+      status:
+        visible: 노출
+        invisible: 비노출
+      _type:
+        notice: 일반공지
+        event: 이벤트
+        application: 지원
+    group:
+      status:
+        recruiting: 모집중
+        closed: 모집마감
+        upcomming: 공연임박
+        done: 공연완료
+    musical:
+      _type:
+        small: 소극
+        big: 대극
+        theatrical: 연극
+    video:
+      _type:
+        performance: 공연
+        practice: 연습
+      show_type:
+        not_show: 숨김
+        home: 홈
+
+
 
   time:
     formats:

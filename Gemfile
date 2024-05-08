@@ -56,7 +56,6 @@ gem "rolify"
 gem "roo"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "versionist"
-
 gem "sass-rails"
-gem 'fog-aws'
 gem "paper_trail"
+gem 'dropzonejs-rails'

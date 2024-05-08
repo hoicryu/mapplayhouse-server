@@ -1,3 +1,8 @@
+/*
+*= require dropzone/basic
+*= require dropzone/dropzone 
+*/
+
 $am-theme-primary: #5c7cfa;
 
 @import "active_admin/mixins";
@@ -17,45 +22,34 @@ $am-theme-primary: #5c7cfa;
   width: 70px;
   height: 70px;
 }
-.active {
-  background: green;
-}
-.disabled {
-  background: grey;
-}
-.sold_out {
-  background: yellow;
-  color: black;
-}
-.ongoing {
-  background: green;
-}
-.finished {
-  background: blue;
-}
-.결제완료 {
-  background: green;
-}
-.환불 {
-  background: yellow;
-  color: black;
-}
-.성공 {
-  background: green;
-}
-.실패 {
-  background: red;
+
+img {
+  width: 100%;
+
+  &.cover-image {
+    max-width: 600px;
+  }
 }
 
-.row {
-  td {
-    img {
-      width: 100%;
-
-      &.admin-show-image {
-        width: 300px;
-        height: 300px;
-      }
+#groups-dropzone.dropzone {
+  .dz-preview:hover {
+    z-index: 12;
+  }
+  .dropzone-image {
+    position: absolute;
+    z-index: 99;
+    width: 20px;
+    left: 10px;
+    top: 10px;
+    input {
+      font-size: 16px;
+      color: $primary-color;
+      font-weight: 900;
+      text-align: center;
+      width: 20px;
+      height: 24px;
+      padding: unset;
+      cursor: pointer;
     }
   }
 }
