@@ -53,6 +53,14 @@ ko:
         _type: 타입
         body: 내용
         show_type: 사이트 표시
+      rating:
+        title: 제목
+        price: 가격
+      part:
+        title: 이름
+        image: 이미지
+        musical: 뮤지컬
+        rating: 등급
 
     models:
       dashboard: 대시보드
@@ -62,6 +70,8 @@ ko:
       musical: 뮤지컬
       group: 그룹
       video: 비디오
+      rating: 등급
+      part: 배역
     
 
     errors:
