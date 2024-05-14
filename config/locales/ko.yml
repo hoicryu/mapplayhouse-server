@@ -56,6 +56,7 @@ ko:
       rating:
         title: 제목
         price: 가격
+        status: 타입
       part:
         title: 이름
         image: 이미지
@@ -136,8 +137,11 @@ ko:
       show_type:
         not_show: 숨김
         home: 홈
-
-
+    rating:
+      status:
+        main: 배역
+        supporting: 조연
+        ensemble: 앙상블
 
   time:
     formats:
