@@ -67,6 +67,8 @@ ko:
         title: 제목
         content: 내용
         _type: 타입
+        sub_content: 참고 내용
+        check_yes: 확인 문구 표시
 
     models:
       dashboard: 대시보드

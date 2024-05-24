@@ -16,6 +16,8 @@ ActiveAdmin.register Term do
       row :id
       row :title
       row :_type do |term| term.enum_ko(:_type) end
+      row :check_yes
+      row :sub_content
       row :content
     end
   end
@@ -25,7 +27,9 @@ ActiveAdmin.register Term do
     f.inputs do
       f.input :title
       f.input :_type, as: :select, collection: Term.enum_selectors(:_type)
+      f.input :sub_content
       f.input :content
+      f.input :check_yes
     end
     f.actions
   end
