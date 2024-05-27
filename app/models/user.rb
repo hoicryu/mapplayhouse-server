@@ -8,6 +8,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  has_many :application_forms
+
   enum gender: { unknown: 0, male: 1, female: 2 }
 
   def self.login(provider, uid, email, nickname = nil)
