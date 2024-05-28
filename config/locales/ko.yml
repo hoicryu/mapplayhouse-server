@@ -69,6 +69,13 @@ ko:
         _type: 타입
         sub_content: 참고 내용
         check_yes: 확인 문구 표시
+      application_form:
+        name: 이름
+        group: 기수
+        birthday: 생년월일
+        part_ids: 지원배역
+        phone: 연락처
+        signature: 서명
 
     models:
       dashboard: 대시보드
@@ -81,6 +88,7 @@ ko:
       rating: 등급
       part: 배역
       term: 조건
+      application_form: 지원서
     
 
     errors:

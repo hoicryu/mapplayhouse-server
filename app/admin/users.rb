@@ -15,7 +15,6 @@ ActiveAdmin.register User do
     column :name
     column :email
     column :phone
-    column :sign_in_count do |user| number_to_currency(user.sign_in_count, unit: "회") end
     column :created_at
     column :updated_at
     actions
