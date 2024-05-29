@@ -9,6 +9,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   has_many :application_forms
+  has_many :user_groups
+  has_many :groups, through: :user_groups, source: :group
 
   enum gender: { unknown: 0, male: 1, female: 2 }
 
