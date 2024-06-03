@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_27_133503) do
+ActiveRecord::Schema.define(version: 2024_05_24_141346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,11 @@ ActiveRecord::Schema.define(version: 2024_04_27_133503) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "birthday"
+    t.string "phone"
+    t.string "part_ids", default: [], array: true
+    t.string "signature"
     t.index ["group_id"], name: "index_application_forms_on_group_id"
     t.index ["user_id"], name: "index_application_forms_on_user_id"
   end
@@ -86,6 +91,7 @@ ActiveRecord::Schema.define(version: 2024_04_27_133503) do
     t.string "application_link"
     t.string "concert_hall"
     t.string "musical_alias"
+    t.datetime "course_start_at"
     t.index ["musical_id"], name: "index_groups_on_musical_id"
   end
 
@@ -141,6 +147,7 @@ ActiveRecord::Schema.define(version: 2024_04_27_133503) do
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -159,6 +166,16 @@ ActiveRecord::Schema.define(version: 2024_04_27_133503) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "terms", force: :cascade do |t|
+    t.string "title"
+    t.integer "_type"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "sub_content"
+    t.boolean "check_yes"
   end
 
   create_table "user_groups", force: :cascade do |t|

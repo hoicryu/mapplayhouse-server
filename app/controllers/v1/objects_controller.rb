@@ -1,6 +1,6 @@
 module V1
   class ObjectsController < V1::BaseController
-    ALLOW_MODELS = %i[user notice group].freeze
+    ALLOW_MODELS = %i[user notice group term application_form].freeze
     before_action :generate_class
 
     def index

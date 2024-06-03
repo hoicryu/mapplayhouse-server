@@ -28,9 +28,6 @@ Rails.application.routes.draw do
     resources :users, only: %i[index show update], shallow: true do
       get :me, on: :collection
       patch :image, on: :collection
-      member do
-        get :obtain_medals
-      end
       resources :notifications, only: %i[index create update]
     end
     namespace :phone_certifications do

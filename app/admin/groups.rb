@@ -58,6 +58,7 @@ ActiveAdmin.register Group do
     column :submit_start_at
     column :submit_end_at
     column :performance_start_at
+    column :course_start_at
     column :application_link
     column :concert_hall
     actions
@@ -78,6 +79,7 @@ ActiveAdmin.register Group do
       row :submit_end_at
       row :performance_start_at
       row :performance_end_at
+      row :course_start_at
       row :application_link
       row :concert_hall
     end
@@ -94,6 +96,7 @@ ActiveAdmin.register Group do
       f.input :submit_end_at, as: :date_time_picker
       f.input :performance_start_at, as: :date_time_picker
       f.input :performance_end_at, as: :date_time_picker
+      f.input :course_start_at, as: :date_time_picker
       f.input :application_link
       f.input :concert_hall
       panel '이미지', class: "description-panel" do

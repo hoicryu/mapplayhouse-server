@@ -46,6 +46,7 @@ ko:
         musical: 뮤지컬
         application_link: 관람신청링크
         concert_hall: 공연장
+        course_start_at: 첫 수업일
       video:
         group: 그룹
         title: 제목
@@ -53,6 +54,28 @@ ko:
         _type: 타입
         body: 내용
         show_type: 사이트 표시
+      rating:
+        title: 제목
+        price: 가격
+        status: 타입
+      part:
+        title: 이름
+        image: 이미지
+        musical: 뮤지컬
+        rating: 등급
+      term: 
+        title: 제목
+        content: 내용
+        _type: 타입
+        sub_content: 참고 내용
+        check_yes: 확인 문구 표시
+      application_form:
+        name: 이름
+        group: 기수
+        birthday: 생년월일
+        part_ids: 지원배역
+        phone: 연락처
+        signature: 서명
 
     models:
       dashboard: 대시보드
@@ -62,7 +85,10 @@ ko:
       musical: 뮤지컬
       group: 그룹
       video: 비디오
-    
+      rating: 등급
+      part: 배역
+      term: 조건
+      application_form: 지원서
 
     errors:
       models:
@@ -126,8 +152,15 @@ ko:
       show_type:
         not_show: 숨김
         home: 홈
-
-
+    rating:
+      status:
+        main: 배역
+        supporting: 조연
+        ensemble: 앙상블
+    term:
+      _type:
+        login: 로그인
+        application: 지원서
 
   time:
     formats:
