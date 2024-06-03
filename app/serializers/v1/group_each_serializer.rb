@@ -5,4 +5,5 @@ class V1::GroupEachSerializer < V1::BaseSerializer
   def main_parts
     object.musical.parts.ransack(rating_status_eq: "main").result
   end
+
 end

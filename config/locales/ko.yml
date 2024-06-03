@@ -89,7 +89,6 @@ ko:
       part: 배역
       term: 조건
       application_form: 지원서
-    
 
     errors:
       models:
