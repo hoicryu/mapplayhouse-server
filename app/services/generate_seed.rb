@@ -46,7 +46,19 @@ class GenerateSeed
   TimeList.instance_eval do
     def generate_seed
       puts "generate time_list"
-      
+      10.times.each do |v|
+        hour = 10 + v
+  
+        2.times.each do |v2|
+          start_minute = v2 === 0 ? "00" : "30"
+          start_at = "#{hour}:#{start_minute}"
+  
+          end_minute = v2 === 0 ? "29" : "59"  
+          end_at = "#{hour}:#{end_minute}"
+  
+          TimeList.create(start_at: start_at, end_at: end_at)
+        end        
+      end
     end
   end
 end

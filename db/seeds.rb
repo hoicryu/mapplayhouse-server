@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-AdminUser.create!(email: "admin@mapplayhouse.com", password: "password", password_confirmation: "password") if Rails.env.development? && !AdminUser.find_by(email: 'admin@mapplayhouse.com').present?
+# AdminUser.create!(email: "admin@mapplayhouse.com", password: "password", password_confirmation: "password") if Rails.env.development? && !AdminUser.find_by(email: 'admin@mapplayhouse.com').present?
 
-[User].each do |cls|
+[User TimeList].each do |cls|
   GenerateSeed.exec(cls)
 end
 
