@@ -76,6 +76,9 @@ ko:
         part_ids: 지원배역
         phone: 연락처
         signature: 서명
+      time_list:
+        start_at: 시작 시간
+        end_at: 종료 시간
 
     models:
       dashboard: 대시보드
@@ -89,6 +92,7 @@ ko:
       part: 배역
       term: 조건
       application_form: 지원서
+      time_list: 예약 시간 리스트
 
     errors:
       models:

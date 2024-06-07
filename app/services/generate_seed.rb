@@ -42,4 +42,11 @@ class GenerateSeed
       @@users = User.ransack(email_cont: "test").result
     end
   end
+
+  TimeList.instance_eval do
+    def generate_seed
+      puts "generate time_list"
+      
+    end
+  end
 end
