@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :application_forms
   has_many :user_groups
   has_many :groups, through: :user_groups, source: :group
+  has_many :reservations
 
   enum gender: { unknown: 0, male: 1, female: 2 }
 

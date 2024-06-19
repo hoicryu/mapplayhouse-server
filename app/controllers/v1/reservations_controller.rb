@@ -5,4 +5,14 @@ class V1::ReservationsController < V1::BaseController
     ## 앞뒤 전후 1주일간의 예약들을 보내준다.
   end
 
+  def create
+    result = current_api_user.reservations.create(reservation_params)
+    render json: result
+  end
+
+  private
+
+  def reservation_params
+      params.require(:reservation).permit(:start_at, :end_at, :num_of_people, :note)
+  end
 end
