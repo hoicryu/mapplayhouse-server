@@ -6,7 +6,16 @@ class V1::ReservationsController < V1::BaseController
   end
 
   def create
-    result = current_api_user.reservations.create(reservation_params)
+    new_start_at = Time.zone.parse(reservation_params[:start_at])
+    new_end_at = Time.zone.parse(reservation_params[:end_at])
+    is_any_overlaps_in_start_at = Reservation.not_rejected.where("start_at <= ?", new_start_at).where("end_at >= ?", new_start_at).present?
+    is_any_overlaps_in_end_at = Reservation.not_rejected.where("start_at <= ?", new_end_at).where("end_at >= ?", new_end_at).present?
+    is_impossible = is_any_overlaps_in_start_at ||  is_any_overlaps_in_end_at
+    if !is_impossible 
+      result = current_api_user.reservations.create(reservation_params)
+    else
+      result = false
+    end
     render json: result
   end
 
