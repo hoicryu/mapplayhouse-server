@@ -19,6 +19,12 @@ class V1::ReservationsController < V1::BaseController
     render json: result
   end
 
+  def for_day
+    date = Time.zone.parse(params[:date])
+    reservations = Reservation.not_rejected.where("start_at >= ?", date).where("end_at <= ?", date.next_day())
+    render json: reservations
+  end
+
   private
 
   def reservation_params

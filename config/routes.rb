@@ -47,6 +47,10 @@ Rails.application.routes.draw do
         get :recent_images
       end
     end
-    resources :reservations, only: %i[index create]
+    resources :reservations, only: %i[index create] do
+      collection do
+        get :for_day
+      end
+    end
   end
 end
