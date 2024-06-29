@@ -161,7 +161,7 @@ ko:
         performance: 공연
         practice: 연습
       show_type:
-        not_show: 숨김
+        invisible: 숨김
         home: 홈
     rating:
       status:
