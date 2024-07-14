@@ -3,7 +3,7 @@ class V1::ReservationsController < V1::BaseController
     date = Time.zone.parse(params[:date])
     start_date = date.beginning_of_month - 1.week
     end_date = date.end_of_month + 1.week
-    reservations = Reservation.where('start_at >= ? AND end_at <= ?', start_date, end_date)
+    reservations = Reservation.not_rejected.where('start_at >= ? AND end_at <= ?', start_date, end_date)
     render json: reservations
   end
 
