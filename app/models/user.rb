@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include ImageUrl
 
   INDEX_PERMIT = [:s, { s: [] }, :user_rooms_room_id_eq].freeze
-  USER_COLUMNS = %i[name email phone accept_sms accept_email agree_tos agree_privacy].freeze
+  USER_COLUMNS = %i[name phone agree_privacy].freeze
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
