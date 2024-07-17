@@ -6,10 +6,10 @@ module ImageUrl
   end
 
   def image_path(size = :square)
-    image? ? image.url(size) : "https://mapplayhouse-production-s3-bucket-mapplayhouse.s3.ap-northeast-2.amazonaws.com/default/default.png"
+    image? ? image.url(size) : ""
   end
 
   def upload_image_path(size = :square)
-    image? ? image.url(size) : "https://mapplayhouse-production-s3-bucket-mapplayhouse.s3.ap-northeast-2.amazonaws.com/default/default.png"
+    image? ? image.url(size) : ""
   end
 end

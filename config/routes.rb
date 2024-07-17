@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     resources :reservations, only: %i[index create] do
       collection do
         get :for_day
+        get :for_month
       end
     end
   end

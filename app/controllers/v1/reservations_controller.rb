@@ -1,9 +1,6 @@
 class V1::ReservationsController < V1::BaseController
   def index
-    date = Time.zone.parse(params[:date])
-    start_date = date.beginning_of_month - 1.week
-    end_date = date.end_of_month + 1.week
-    reservations = Reservation.not_rejected.where('start_at >= ? AND end_at <= ?', start_date, end_date)
+    reservations = current_api_user.reservations.order(created_at: :desc)
     render json: reservations
   end
 
@@ -19,6 +16,14 @@ class V1::ReservationsController < V1::BaseController
       result = false
     end
     render json: result
+  end
+
+  def for_month
+    date = Time.zone.parse(params[:date])
+    start_date = date.beginning_of_month - 1.week
+    end_date = date.end_of_month + 1.week
+    reservations = Reservation.not_rejected.where('start_at >= ? AND end_at <= ?', start_date, end_date)
+    render json: reservations
   end
 
   def for_day
