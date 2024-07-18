@@ -85,6 +85,7 @@ ko:
         end_at: 종료 시간
         note: 메모
         reason_for_rejection: 거부 사유
+        group: 그룹
       user_group:
         group: 그룹
         user: 유저

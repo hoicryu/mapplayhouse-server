@@ -2,11 +2,14 @@ ActiveAdmin.register Reservation do
   menu parent: "연습실"
 
   filter :user_name_cont, label: "유저 필터"
+  filter :group_title_cont, label: "그룹 필터"
+  filter :group_musical_title_cont, label: "뮤지컬 필터"
 
 
   index do
     id_column
     column :user
+    column :group
     column :status do |reservation| reservation.enum_ko(:status) end
     column :start_at
     column :end_at
@@ -19,6 +22,7 @@ ActiveAdmin.register Reservation do
     attributes_table do
       row :id
       row :user
+      row :group
       row :status do |reservation| reservation.enum_ko(:status) end
       row :start_at
       row :end_at
@@ -31,6 +35,8 @@ ActiveAdmin.register Reservation do
 
   form do |f|
     f.inputs do
+      f.input :user
+      f.input :group
       f.input :status, as: :select, collection: Reservation.enum_selectors(:status)
       f.input :start_at, as: :date_time_picker
       f.input :end_at, as: :date_time_picker
