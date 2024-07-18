@@ -85,6 +85,10 @@ ko:
         end_at: 종료 시간
         note: 메모
         reason_for_rejection: 거부 사유
+      user_group:
+        group: 그룹
+        user: 유저
+        status: 상태
 
     models:
       dashboard: 대시보드
@@ -100,6 +104,7 @@ ko:
       application_form: 지원서
       time_list: 예약 시간 리스트
       reservation: 예약
+      user_group: 유저소속
 
     errors:
       models:
@@ -177,6 +182,10 @@ ko:
         before: 승인전
         approved: 승인완료
         rejected: 거부
+    user_group: 
+      status:
+        activated: 활성화
+        deactivated: 비활성화
 
   time:
     formats:
