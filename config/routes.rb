@@ -53,5 +53,6 @@ Rails.application.routes.draw do
         get :for_month
       end
     end
+    resources :user_groups, only: %i[index]
   end
 end

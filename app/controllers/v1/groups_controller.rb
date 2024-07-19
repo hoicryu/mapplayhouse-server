@@ -1,6 +1,6 @@
 class V1::GroupsController < V1::BaseController
   def before_perform
-      groups = Group.upcomming.order(performance_start_at: :asc)
+      groups = Group.performance_upcomming.order(performance_start_at: :asc)
     if groups.present?
       group = groups.first
     else
