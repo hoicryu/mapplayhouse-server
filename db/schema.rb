@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_18_090313) do
+ActiveRecord::Schema.define(version: 2024_07_25_155507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,7 +195,9 @@ ActiveRecord::Schema.define(version: 2024_07_18_090313) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "part_id"
     t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["part_id"], name: "index_user_groups_on_part_id"
     t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
@@ -256,6 +258,7 @@ ActiveRecord::Schema.define(version: 2024_07_18_090313) do
   add_foreign_key "reservations", "groups"
   add_foreign_key "reservations", "users"
   add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "parts"
   add_foreign_key "user_groups", "users"
   add_foreign_key "users", "roles"
   add_foreign_key "videos", "groups"
