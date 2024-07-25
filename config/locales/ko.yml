@@ -89,6 +89,7 @@ ko:
       user_group:
         group: 그룹
         user: 유저
+        part: 배역
         status: 상태
 
     models:
