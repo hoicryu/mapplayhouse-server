@@ -76,6 +76,21 @@ ko:
         part_ids: 지원배역
         phone: 연락처
         signature: 서명
+      time_list:
+        start_at: 시작 시간
+        end_at: 종료 시간
+      reservation: 
+        status: 상태
+        start_at: 시작 시간
+        end_at: 종료 시간
+        note: 메모
+        reason_for_rejection: 거부 사유
+        group: 그룹
+      user_group:
+        group: 그룹
+        user: 유저
+        part: 배역
+        status: 상태
 
     models:
       dashboard: 대시보드
@@ -89,6 +104,9 @@ ko:
       part: 배역
       term: 조건
       application_form: 지원서
+      time_list: 예약 시간 리스트
+      reservation: 예약
+      user_group: 유저소속
 
     errors:
       models:
@@ -137,8 +155,8 @@ ko:
     group:
       status:
         recruiting: 모집중
-        closed: 모집마감
-        upcomming: 공연임박
+        proceeding: 진행중
+        performance_upcomming: 공연임박
         done: 공연완료
     musical:
       _type:
@@ -150,7 +168,7 @@ ko:
         performance: 공연
         practice: 연습
       show_type:
-        not_show: 숨김
+        invisible: 숨김
         home: 홈
     rating:
       status:
@@ -161,6 +179,15 @@ ko:
       _type:
         login: 로그인
         application: 지원서
+    reservation:
+      status:
+        before: 승인전
+        approved: 승인완료
+        rejected: 거부
+    user_group: 
+      status:
+        activated: 활성화
+        deactivated: 비활성화
 
   time:
     formats:

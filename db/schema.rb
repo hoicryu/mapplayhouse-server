@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_05_24_141346) do
+ActiveRecord::Schema.define(version: 2024_07_25_155507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,12 +152,16 @@ ActiveRecord::Schema.define(version: 2024_05_24_141346) do
 
   create_table "reservations", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "status"
+    t.integer "status", default: 1
     t.datetime "start_at"
     t.datetime "end_at"
     t.string "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "num_of_people"
+    t.string "reason_for_rejection"
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_reservations_on_group_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
@@ -178,13 +182,22 @@ ActiveRecord::Schema.define(version: 2024_05_24_141346) do
     t.boolean "check_yes"
   end
 
+  create_table "time_lists", force: :cascade do |t|
+    t.time "start_at"
+    t.time "end_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "user_groups", force: :cascade do |t|
     t.bigint "group_id", null: false
     t.bigint "user_id", null: false
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "part_id"
     t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["part_id"], name: "index_user_groups_on_part_id"
     t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
@@ -242,8 +255,10 @@ ActiveRecord::Schema.define(version: 2024_05_24_141346) do
   add_foreign_key "groups", "musicals"
   add_foreign_key "parts", "musicals"
   add_foreign_key "parts", "ratings"
+  add_foreign_key "reservations", "groups"
   add_foreign_key "reservations", "users"
   add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "parts"
   add_foreign_key "user_groups", "users"
   add_foreign_key "users", "roles"
   add_foreign_key "videos", "groups"

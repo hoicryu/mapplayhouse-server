@@ -47,5 +47,12 @@ Rails.application.routes.draw do
         get :recent_images
       end
     end
+    resources :reservations, only: %i[index create] do
+      collection do
+        get :for_day
+        get :for_month
+      end
+    end
+    resources :user_groups, only: %i[index]
   end
 end

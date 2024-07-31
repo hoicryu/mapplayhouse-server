@@ -33,7 +33,7 @@ class ApiController < ActionController::API
   end
 
   def configure_permitted_parameters
-    user_fields = %w[name gender birthday]
+    user_fields = %w[name phone]
 
     devise_parameter_sanitizer.permit(:sign_up, keys: user_fields)
     devise_parameter_sanitizer.permit(:account_update, keys: user_fields)

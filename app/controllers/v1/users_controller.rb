@@ -84,7 +84,7 @@ module V1
     private
 
     def user_params
-      params.require(:user).permit(:name, :email, :image, :nickname)
+      params.require(:user).permit(:name, :phone, :image)
     end
 
     def index_params
